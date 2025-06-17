@@ -1,0 +1,591 @@
+/**
+ * WP Auto Whats - Enhanced Admin CSS
+ * Archivo: assets/css/enhanced-admin.css
+ * Estilos para funcionalidad mejorada del plugin
+ */
+
+/* ===== VARIABLES CSS ===== */
+:root {
+    --autwa-primary: #0073aa;
+    --autwa-success: #46b450;
+    --autwa-warning: #ffb900;
+    --autwa-error: #dc3232;
+    --autwa-border: #ddd;
+    --autwa-bg-light: #f9f9f9;
+    --autwa-text: #333;
+    --autwa-text-muted: #666;
+    --autwa-radius: 6px;
+    --autwa-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --autwa-transition: all 0.3s ease;
+}
+
+/* ===== CONTENEDORES GENERALES ===== */
+.autwa-enhanced-container,
+.wp-auto-whats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.autwa-section {
+    background: white;
+    border: 1px solid var(--autwa-border);
+    border-radius: var(--autwa-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--autwa-shadow);
+}
+
+.autwa-section h3,
+.autwa-section h4 {
+    color: var(--autwa-text);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--autwa-primary);
+}
+
+/* ===== ESTADO DE SESIÓN ===== */
+.autwa-session-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: var(--autwa-bg-light);
+    border: 1px solid var(--autwa-border);
+    border-radius: var(--autwa-radius);
+    margin-bottom: 20px;
+    transition: var(--autwa-transition);
+}
+
+.autwa-status-dot,
+.status-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ccc;
+    transition: var(--autwa-transition);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.autwa-status-dot.connected,
+.status-dot.connected {
+    background: var(--autwa-success);
+    box-shadow: 0 0 10px rgba(70, 180, 80, 0.5);
+}
+
+.autwa-status-dot.connected::after,
+.status-dot.connected::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 2px solid var(--autwa-success);
+    border-radius: 50%;
+    animation: autwa-pulse-ring 2s ease-out infinite;
+}
+
+@keyframes autwa-pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.autwa-status-dot.connecting,
+.status-dot.connecting {
+    background: var(--autwa-warning);
+    animation: autwa-pulse-dot 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes autwa-pulse-dot {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+.autwa-status-dot.disconnected,
+.status-dot.disconnected {
+    background: var(--autwa-error);
+}
+
+.autwa-status-dot.error,
+.status-dot.error {
+    background: var(--autwa-error);
+    animation: autwa-blink-dot 1s ease-in-out infinite;
+}
+
+@keyframes autwa-blink-dot {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0.3;
+    }
+}
+
+.autwa-status-text,
+.status-text {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--autwa-text);
+}
+
+/* ===== SECCIÓN QR MEJORADA ===== */
+.autwa-qr-section {
+    background: white;
+    border: 1px solid var(--autwa-border);
+    border-radius: var(--autwa-radius);
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--autwa-shadow);
+}
+
+.autwa-qr-container,
+.qr-container,
+#qr-container {
+    min-height: 250px;
+    border: 2px dashed var(--autwa-border);
+    border-radius: var(--autwa-radius);
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    transition: var(--autwa-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.autwa-qr-container:hover,
+.qr-container:hover,
+#qr-container:hover {
+    border-color: var(--autwa-primary);
+    background: #f0f8ff;
+}
+
+.autwa-qr-image-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.autwa-qr-image {
+    max-width: 280px;
+    height: auto;
+    border: 3px solid white;
+    border-radius: var(--autwa-radius);
+    box-shadow: var(--autwa-shadow);
+    transition: var(--autwa-transition);
+}
+
+.autwa-qr-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.autwa-qr-instructions {
+    margin-top: 15px;
+    font-weight: 600;
+    color: var(--autwa-primary);
+    font-size: 15px;
+}
+
+.autwa-qr-text-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.autwa-qr-text-area {
+    width: 100%;
+    height: 120px;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 11px;
+    padding: 12px;
+    border: 1px solid var(--autwa-border);
+    border-radius: var(--autwa-radius);
+    resize: vertical;
+    background: white;
+}
+
+.autwa-qr-note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--autwa-text-muted);
+    font-style: italic;
+}
+
+.autwa-qr-controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.autwa-qr-controls .button {
+    margin: 0 8px;
+    min-width: 140px;
+}
+
+/* ===== TIMER QR ===== */
+.autwa-qr-timer,
+#qr-timer {
+    text-align: center;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: var(--autwa-radius);
+    padding: 12px;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #856404;
+    transition: var(--autwa-transition);
+}
+
+.autwa-qr-timer.autwa-urgent,
+#qr-timer.urgent {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+    color: var(--autwa-error);
+    animation: autwa-urgent-pulse 1s ease-in-out infinite;
+}
+
+@keyframes autwa-urgent-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.01);
+    }
+}
+
+/* ===== CONTENEDORES DE ERROR Y EXPIRACIÓN ===== */
+.autwa-qr-error-container,
+.autwa-qr-expired-container {
+    text-align: center;
+    padding: 30px;
+    color: var(--autwa-text-muted);
+}
+
+.autwa-qr-error-container h4,
+.autwa-qr-expired-container h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--autwa-error);
+    margin-bottom: 15px;
+    border: none;
+    padding: 0;
+}
+
+.autwa-error-message {
+    color: var(--autwa-error);
+    font-style: italic;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+/* ===== LOADING Y SPINNERS ===== */
+.autwa-loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: var(--autwa-text-muted);
+}
+
+.autwa-loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--autwa-primary);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: autwa-spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes autwa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== PRUEBAS Y DEBUG ===== */
+.autwa-test-results,
+#test-results {
+    background: var(--autwa-bg-light);
+    border: 1px solid var(--autwa-border);
+    border-radius: var(--autwa-radius);
+    padding: 15px;
+    margin-top: 15px;
+    min-height: 80px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.autwa-test-success {
+    color: var(--autwa-success);
+}
+
+.autwa-test-success h4 {
+    color: var(--autwa-success);
+    margin-bottom: 8px;
+}
+
+.autwa-test-error {
+    color: var(--autwa-error);
+}
+
+.autwa-test-error h4 {
+    color: var(--autwa-error);
+    margin-bottom: 8px;
+}
+
+.autwa-debug-logs {
+    background: #1e1e1e;
+    color: #f0f0f0;
+    border-radius: var(--autwa-radius);
+    padding: 15px;
+    max-height: 250px;
+    overflow-y: auto;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+.autwa-session-info,
+#session-info {
+    background: var(--autwa-bg-light);
+    border: 1px solid var(--autwa-border);
+    border-radius: var(--autwa-radius);
+    padding: 15px;
+    margin-top: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 12px;
+}
+
+.autwa-session-info pre,
+#session-info pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* ===== NOTIFICACIONES ===== */
+.autwa-notification {
+    margin: 15px 0;
+    animation: autwa-slide-in 0.3s ease-out;
+    border-left-width: 4px;
+    box-shadow: var(--autwa-shadow);
+}
+
+@keyframes autwa-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== BOTONES MEJORADOS ===== */
+.button.loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.button.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: autwa-spin 1s linear infinite;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+    transition: var(--autwa-transition);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+/* ===== ESTADOS DE CONEXIÓN ===== */
+.autwa-connection-status {
+    padding: 12px 15px;
+    border-radius: var(--autwa-radius);
+    margin: 10px 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.autwa-connection-status.connected {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.autwa-connection-status.disconnected {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.autwa-connection-status.connecting {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .autwa-enhanced-container {
+        margin: 10px;
+    }
+    
+    .autwa-section {
+        padding: 15px;
+    }
+    
+    .autwa-qr-container,
+    .qr-container,
+    #qr-container {
+        min-height: 200px;
+    }
+    
+    .autwa-qr-image {
+        max-width: 200px;
+    }
+    
+    .autwa-qr-controls .button {
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+        min-width: auto;
+    }
+    
+    .autwa-session-status {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .autwa-qr-section {
+        padding: 15px;
+    }
+    
+    .autwa-qr-container,
+    .qr-container,
+    #qr-container {
+        min-height: 180px;
+    }
+    
+    .autwa-qr-image {
+        max-width: 180px;
+    }
+    
+    .autwa-qr-text-area {
+        height: 100px;
+    }
+}
+
+/* ===== SCROLLBARS PERSONALIZADOS ===== */
+.autwa-debug-logs::-webkit-scrollbar,
+.autwa-session-info::-webkit-scrollbar,
+.autwa-test-results::-webkit-scrollbar {
+    width: 6px;
+}
+
+.autwa-debug-logs::-webkit-scrollbar-track,
+.autwa-session-info::-webkit-scrollbar-track,
+.autwa-test-results::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.autwa-debug-logs::-webkit-scrollbar-thumb,
+.autwa-session-info::-webkit-scrollbar-thumb,
+.autwa-test-results::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.autwa-debug-logs::-webkit-scrollbar-thumb:hover,
+.autwa-session-info::-webkit-scrollbar-thumb:hover,
+.autwa-test-results::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* ===== UTILIDADES ===== */
+.autwa-hidden {
+    display: none !important;
+}
+
+.autwa-text-center {
+    text-align: center;
+}
+
+.autwa-text-muted {
+    color: var(--autwa-text-muted);
+}
+
+.autwa-fade-in {
+    animation: autwa-fade-in 0.5s ease-in;
+}
+
+@keyframes autwa-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===== ACCESIBILIDAD ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .autwa-qr-controls,
+    .button,
+    .autwa-loading-spinner {
+        display: none !important;
+    }
+    
+    .autwa-qr-image {
+        max-width: 200px;
+    }
+    
+    .autwa-enhanced-container {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
